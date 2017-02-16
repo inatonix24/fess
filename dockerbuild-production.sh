@@ -17,5 +17,5 @@ rm -rf tmp
 
 # 既存の運用コンテナの削除して、ビルドしたイメージから起動
 docker rm -f rms-production
-docker run -d -p 8080:8080 --net=host --name rms-production ror-manual-search:production
+docker run -d -p 8080:8080 --name rms-production ror-manual-search:production
 
