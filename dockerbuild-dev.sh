@@ -7,7 +7,7 @@ docker commit rms-production ror-manual-search:production
 rm -rf tmp
 
 # gitのコミット情報から、適用すべき修正ファイルをtmpディレクトリにコピー
-srcpathes=`git diff --name-only 978e2e651cbc2688ebecb4821fead712dbf7d6b2 | grep ^src`
+srcpathes=`git diff --name-only 978e2e651cbc2688ebecb^ | grep ^src`
 
 for srcpath in $srcpathes
 do
