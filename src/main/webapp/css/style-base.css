@@ -66,9 +66,12 @@ abbr[title] {
   border-bottom: 1px dotted;
 }
 
-b,
-strong {
+b {
   font-weight: bold;
+}
+
+strong {
+  color: #FA8072;
 }
 
 dfn {
@@ -5927,7 +5930,7 @@ a.text-danger:hover {
 
 .bg-inverse {
   color: #eceeef;
-  background-color: #373a3c;
+  background-color: #303b33;
 }
 
 .bg-faded {
