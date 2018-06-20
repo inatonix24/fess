@@ -16,8 +16,17 @@
 <link href="${fe:url('/css/style.css')}" rel="stylesheet" type="text/css" />
 <link href="${fe:url('/css/font-awesome.min.css')}" rel="stylesheet"
 	type="text/css" />
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
+<style>
+	body {
+		margin: 0;
+		height: 0;
+		overflow: hidden;
+		background: white;
+	}
+</style>
 </head>
-<body>
+<body onload="init();">
 	<la:form styleClass="form-stacked" action="search" method="get"
 		styleId="searchForm">
 		${fe:facetForm()}${fe:geoForm()}
@@ -67,10 +76,11 @@
 				</ul>
 			</div>
 		</nav>
-		<div class="container">
+	<div class="wrapdiv">
+		<div class="containerdiv">
 			<div class="row content">
 				<div class="center-block searchFormBox">
-					<h1 class="mainLogo">
+					<h1 class="mainLogo noselect">
 						<img src="${fe:url('/images/logo.png')}"
 							alt="<la:message key="labels.index_title" />" />
 					</h1>
@@ -124,7 +134,9 @@
 					</fieldset>
 				</div>
 			</div>
-			<jsp:include page="footer.jsp" />
+			<canvas id="canvas" class="noselect"></canvas>
+		</div>
+		<jsp:include page="footer.jsp" />
 		</div>
 		<div id="searchOptions" class="control-options">
 			<div class="container">
@@ -149,5 +161,8 @@
 	<script type="text/javascript" src="${fe:url('/js/bootstrap.js')}"></script>
 	<script type="text/javascript" src="${fe:url('/js/suggestor.js')}"></script>
 	<script type="text/javascript" src="${fe:url('/js/index.js')}"></script>
+	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
+	<script type="text/javascript" src="${f:url('/js/box2dweb.js')}"></script>
+	<script type="text/javascript" src="${f:url('/js/main.js')}"></script>
 </body>
 </html>
