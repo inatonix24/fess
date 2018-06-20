@@ -76,68 +76,70 @@
 				</ul>
 			</div>
 		</nav>
-	<div class="wrapdiv">
-		<div class="containerdiv">
-			<div class="row content">
-				<div class="center-block searchFormBox">
-					<h1 class="mainLogo noselect">
-						<img src="${fe:url('/images/logo.png')}"
-							alt="<la:message key="labels.index_title" />" />
-					</h1>
-					<div class="notification">${notification}</div>
-					<div>
-						<la:info id="msg" message="true">
-							<div class="alert alert-info">${msg}</div>
-						</la:info>
-						<la:errors header="errors.front_header"
-							footer="errors.front_footer" prefix="errors.front_prefix"
-							suffix="errors.front_suffix" />
-					</div>
-					<fieldset>
-						<div class="clearfix">
-							<div class="centered col-lg-5 col-md-6 col-sm-6 col-xs-8">
-								<la:text styleClass="query form-control center-block"
-									property="q" size="50" maxlength="1000" styleId="contentQuery"
-									autocomplete="off" />
-							</div>
+		<div class="wrapdiv">
+			<div id="canvasdiv">
+				<canvas id="canvas" class="noselect"></canvas>
+			</div>
+			<div class="container">
+				<div class="row content">
+					<div class="center-block searchFormBox">
+						<h1 class="mainLogo noselect">
+							<img src="${fe:url('/images/logo.png')}"
+								alt="<la:message key="labels.index_title" />" />
+						</h1>
+						<div class="notification">${notification}</div>
+						<div>
+							<la:info id="msg" message="true">
+								<div class="alert alert-info">${msg}</div>
+							</la:info>
+							<la:errors header="errors.front_header"
+								footer="errors.front_footer" prefix="errors.front_prefix"
+								suffix="errors.front_suffix" />
 						</div>
-						<c:if test="${!empty popularWords}">
+						<fieldset>
 							<div class="clearfix">
-								<p class="popularWordBody ellipsis">
-									<la:message key="labels.search_popular_word_word" />
-									<c:forEach var="item" varStatus="s" items="${popularWords}">
-										<c:if test="${s.index < 3}">
-											<la:link
-												href="/search?q=${f:u(item)}${fe:facetQuery()}${fe:geoQuery()}">${f:h(item)}</la:link>
-										</c:if>
-										<c:if test="${3 <= s.index}">
-											<la:link styleClass="hidden-xs"
-												href="/search?q=${f:u(item)}${fe:facetQuery()}${fe:geoQuery()}">${f:h(item)}</la:link>
-										</c:if>
-									</c:forEach>
-								</p>
+								<div class="centered col-lg-5 col-md-6 col-sm-6 col-xs-8">
+									<la:text styleClass="query form-control center-block"
+										property="q" size="50" maxlength="1000" styleId="contentQuery"
+										autocomplete="off" />
+								</div>
 							</div>
-						</c:if>
-						<div class="clearfix searchButtonBox btn-group">
-							<button type="submit" name="search" id="searchButton"
-								class="btn btn-primary">
-								<i class="fa fa-search"></i>
-								<la:message key="labels.index_form_search_btn" />
-							</button>
-							<button type="button" class="btn btn-secondary"
-								data-toggle="control-options" data-target="#searchOptions"
-								id="searchOptionsButton">
-								<i class="fa fa-cog"></i>
-								<la:message key="labels.index_form_option_btn" />
-							</button>
-						</div>
-					</fieldset>
+							<c:if test="${!empty popularWords}">
+								<div class="clearfix">
+									<p class="popularWordBody ellipsis">
+										<la:message key="labels.search_popular_word_word" />
+										<c:forEach var="item" varStatus="s" items="${popularWords}">
+											<c:if test="${s.index < 3}">
+												<la:link
+													href="/search?q=${f:u(item)}${fe:facetQuery()}${fe:geoQuery()}">${f:h(item)}</la:link>
+											</c:if>
+											<c:if test="${3 <= s.index}">
+												<la:link styleClass="hidden-xs"
+													href="/search?q=${f:u(item)}${fe:facetQuery()}${fe:geoQuery()}">${f:h(item)}</la:link>
+											</c:if>
+										</c:forEach>
+									</p>
+								</div>
+							</c:if>
+							<div class="clearfix searchButtonBox btn-group">
+								<button type="submit" name="search" id="searchButton"
+									class="btn btn-primary">
+									<i class="fa fa-search"></i>
+									<la:message key="labels.index_form_search_btn" />
+								</button>
+								<button type="button" class="btn btn-secondary"
+									data-toggle="control-options" data-target="#searchOptions"
+									id="searchOptionsButton">
+									<i class="fa fa-cog"></i>
+									<la:message key="labels.index_form_option_btn" />
+								</button>
+							</div>
+						</fieldset>
+					</div>
 				</div>
 			</div>
-			<canvas id="canvas" class="noselect"></canvas>
 		</div>
 		<jsp:include page="footer.jsp" />
-		</div>
 		<div id="searchOptions" class="control-options">
 			<div class="container">
 				<jsp:include page="searchOptions.jsp" />

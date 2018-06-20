@@ -54,15 +54,15 @@ template {
   position: relative;
 }
 
-.containerdiv {
+/* .containerdiv {
   position: absolute;
   z-index: 10000;
   left: 50%;
   margin-left: -340px;
-}
+} */
 
-#canvas {
-  position: relative;
+#canvasdiv {
+  position: absolute;
   z-index: 0;
 }
 
@@ -769,6 +769,7 @@ pre code {
   padding-left: .9375rem;
   margin-right: auto;
   margin-left: auto;
+  z-index: 10000;
 }
 
 .container:before,
