@@ -137,7 +137,7 @@ function setupPhysics() {
     //デバッグ描画の設定
     var debugDraw = new box2d.b2DebugDraw();
     debugDraw.SetSprite ( canvas.getContext ("2d"));
-    debugDraw.SetDrawScale(30);     //描画スケール
+    debugDraw.SetDrawScale(SCALE);     //描画スケール
     debugDraw.SetFillAlpha(0.3);    //半透明値
     debugDraw.SetLineThickness(1.0);//線の太さ
     debugDraw.SetFlags(box2d.b2DebugDraw.e_shapeBit | box2d.b2DebugDraw.e_jointBit);// 何をデバッグ描画するか
@@ -145,8 +145,8 @@ function setupPhysics() {
     
     createWall(STAGE_W / 2, 0, GROUND_W, GROUND_H);
     createWall(0, STAGE_H / 2, GROUND_H, GROUND_W);
-    createWall2(STAGE_W, STAGE_H / 2, 100, 100);
-    createWall3(STAGE_W, STAGE_H / 2, 100, 100);
+    createWall2(STAGE_W / SCALE, STAGE_H / SCALE);
+    createBox(STAGE_W / SCALE, STAGE_H / SCALE);
     ground = createWall(STAGE_W / 2, STAGE_H, GROUND_W, GROUND_H);
 }
 
@@ -175,32 +175,33 @@ function createWall(x, y, w, h) {
 }
 
 function createWall2(x, y, w, h) {
-
     var fixDef = new box2d.b2FixtureDef(0);
     fixDef.density = 1;
     fixDef.friction = 0.5;
+    var angle = Math.PI * 0.25
     var bodyDef = new box2d.b2BodyDef();
     bodyDef.type = box2d.b2Body.b2_staticBody;
-    bodyDef.position.x = x / SCALE + 3;
-    bodyDef.position.y = y / SCALE;
+    bodyDef.position.y = (y-1)/ 2;
+    var length = bodyDef.position.y / Math.cos(angle); // 線全体の半分の長さ
+    bodyDef.position.x = x + length * Math.sin(angle);
     fixDef.shape = new box2d.b2PolygonShape();
-    fixDef.shape.SetAsOrientedBox(1, 100,new box2d.b2Vec2(5,0),Math.PI/6);
+    fixDef.shape.SetAsOrientedBox(0.01, length, new box2d.b2Vec2(0,0), angle);
     var ground = world.CreateBody(bodyDef);
     ground.CreateFixture(fixDef);
     return ground;
 }
 
-function createWall3(x, y, w, h) {
+function createBox(x, y) {
 
     var fixDef = new box2d.b2FixtureDef(0);
     fixDef.density = 1;
     fixDef.friction = 0.5;
     var bodyDef = new box2d.b2BodyDef();
     bodyDef.type = box2d.b2Body.b2_staticBody;
-    bodyDef.position.x = 30 / SCALE + 3;
-    bodyDef.position.y = 30 / SCALE;
+    bodyDef.position.x = x;
+    bodyDef.position.y = y;
     fixDef.shape = new box2d.b2PolygonShape();
-    fixDef.shape.SetAsOrientedBox(1, 100,new box2d.b2Vec2(5,0),Math.PI/6);
+    fixDef.shape.SetAsOrientedBox(0.01, 1,new box2d.b2Vec2(0,0));
     var ground = world.CreateBody(bodyDef);
     ground.CreateFixture(fixDef);
     return ground;
@@ -251,5 +252,5 @@ function handleTick() {
         body = body.GetNext();
     }
     stage.update();
-    world.DrawDebugData(); // デバック描画
+    // world.DrawDebugData(); // デバック描画
 }
