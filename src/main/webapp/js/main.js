@@ -28,7 +28,7 @@ var lastPressObject;
 function init() {
     var canvas = document.getElementById("canvas");
     canvas.setAttribute("width", STAGE_W + "px");
-     canvas.setAttribute("height", STAGE_H + "px");
+    canvas.setAttribute("height", STAGE_H + "px");
     stage = new createjs.Stage(canvas);
 
     // enable touch action
@@ -47,6 +47,7 @@ function init() {
     createjs.Ticker.useRAF = true;
     createjs.Ticker.addEventListener("tick", handleTick);
 }
+
 
 function handleMouseDown(event) {
     var mouseX = event.stageX;
@@ -133,9 +134,19 @@ function createNeko() {
 function setupPhysics() {
     world = new box2d.b2World(new box2d.b2Vec2(0, 100), true);
 
+    //デバッグ描画の設定
+    var debugDraw = new box2d.b2DebugDraw();
+    debugDraw.SetSprite ( canvas.getContext ("2d"));
+    debugDraw.SetDrawScale(30);     //描画スケール
+    debugDraw.SetFillAlpha(0.3);    //半透明値
+    debugDraw.SetLineThickness(1.0);//線の太さ
+    debugDraw.SetFlags(box2d.b2DebugDraw.e_shapeBit | box2d.b2DebugDraw.e_jointBit);// 何をデバッグ描画するか
+    world.SetDebugDraw(debugDraw);
+    
     createWall(STAGE_W / 2, 0, GROUND_W, GROUND_H);
     createWall(0, STAGE_H / 2, GROUND_H, GROUND_W);
     createWall2(STAGE_W, STAGE_H / 2, 100, 100);
+    createWall3(STAGE_W, STAGE_H / 2, 100, 100);
     ground = createWall(STAGE_W / 2, STAGE_H, GROUND_W, GROUND_H);
 }
 
@@ -178,6 +189,23 @@ function createWall2(x, y, w, h) {
     ground.CreateFixture(fixDef);
     return ground;
 }
+
+function createWall3(x, y, w, h) {
+
+    var fixDef = new box2d.b2FixtureDef(0);
+    fixDef.density = 1;
+    fixDef.friction = 0.5;
+    var bodyDef = new box2d.b2BodyDef();
+    bodyDef.type = box2d.b2Body.b2_staticBody;
+    bodyDef.position.x = 30 / SCALE + 3;
+    bodyDef.position.y = 30 / SCALE;
+    fixDef.shape = new box2d.b2PolygonShape();
+    fixDef.shape.SetAsOrientedBox(1, 100,new box2d.b2Vec2(5,0),Math.PI/6);
+    var ground = world.CreateBody(bodyDef);
+    ground.CreateFixture(fixDef);
+    return ground;
+}
+
 
 function getBodyAtMouse(includeStatic) {
     var aabb = new box2d.b2AABB();
@@ -222,6 +250,6 @@ function handleTick() {
         }
         body = body.GetNext();
     }
-
     stage.update();
+    world.DrawDebugData(); // デバック描画
 }
