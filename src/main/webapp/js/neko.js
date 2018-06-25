@@ -16,9 +16,9 @@ var box2d = {
 var SCALE = 30;
 var stage, world;
 var STAGE_W = window.innerWidth;
-var STAGE_H = window.innerHeight - 140;
+var STAGE_H = window.innerHeight - 120;
 var GROUND_W = STAGE_W;
-var GROUND_H = 25;
+var GROUND_H = STAGE_H - 35
 var IMAGE_SIZE = 54;
 var mouseJoint = null;
 var ground = null;
@@ -144,10 +144,10 @@ function setupPhysics() {
     world.SetDebugDraw(debugDraw);
     
     createWall(STAGE_W / 2, 0, STAGE_W, 0.01);
-    createWall(0, STAGE_H / 2, 0.01, STAGE_H);
-    createWall2(STAGE_W / SCALE, STAGE_H / SCALE);
-    createBox(STAGE_W / SCALE, STAGE_H / SCALE);
-    ground = createWall(STAGE_W / 2, STAGE_H, GROUND_W, 0.01);
+    createWall(0, GROUND_H / 2, 0.01, GROUND_H);
+    createWall2(STAGE_W / SCALE, GROUND_H / SCALE);
+    createBox(STAGE_W / SCALE, GROUND_H / SCALE);
+    ground = createWall(STAGE_W / 2, GROUND_H, GROUND_W, 0.01);
 }
 
 function createWall(x, y, w, h) {
@@ -252,5 +252,5 @@ function handleTick() {
         body = body.GetNext();
     }
     stage.update();
-    world.DrawDebugData(); // デバック描画
+    // world.DrawDebugData(); // デバック描画
 }
