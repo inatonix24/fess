@@ -252,5 +252,5 @@ function handleTick() {
         body = body.GetNext();
     }
     stage.update();
-    // world.DrawDebugData(); // デバック描画
+    world.DrawDebugData(); // デバック描画
 }
