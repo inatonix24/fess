@@ -143,11 +143,11 @@ function setupPhysics() {
     debugDraw.SetFlags(box2d.b2DebugDraw.e_shapeBit | box2d.b2DebugDraw.e_jointBit);// 何をデバッグ描画するか
     world.SetDebugDraw(debugDraw);
     
-    createWall(STAGE_W / 2, 0, GROUND_W, GROUND_H);
-    createWall(0, STAGE_H / 2, GROUND_H, GROUND_W);
+    createWall(STAGE_W / 2, 0, STAGE_W, 0.01);
+    createWall(0, STAGE_H / 2, 0.01, STAGE_H);
     createWall2(STAGE_W / SCALE, STAGE_H / SCALE);
     createBox(STAGE_W / SCALE, STAGE_H / SCALE);
-    ground = createWall(STAGE_W / 2, STAGE_H, GROUND_W, GROUND_H);
+    ground = createWall(STAGE_W / 2, STAGE_H, GROUND_W, 0.01);
 }
 
 function createWall(x, y, w, h) {
