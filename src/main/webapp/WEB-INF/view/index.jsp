@@ -173,7 +173,7 @@
 	<script type="text/javascript" src="${fe:url('/js/bootstrap.js')}"></script>
 	<script type="text/javascript" src="${fe:url('/js/suggestor.js')}"></script>
 	<script type="text/javascript" src="${fe:url('/js/index.js')}"></script>
-	<script type="text/javascript" src="http://code.createjs.com/createjs-2013.02.12.min.js"></script>
+	<script type="text/javascript" src="${fe:url('/js/createjs-2013.02.12.min.js')}"></script>
 	<script type="text/javascript" src="${f:url('/js/box2dweb.js')}"></script>
 	<script type="text/javascript" src="${f:url('/js/neko.js')}"></script>
 </body>
