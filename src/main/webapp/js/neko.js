@@ -112,7 +112,7 @@ function handleMouseUp(event) {
 
 function createNeko() {
     // create shape
-    var bmp = new createjs.Bitmap("../images/nekobean.png");
+    var bmp = new createjs.Bitmap("images/nekobean.png");
     bmp.regX = IMAGE_SIZE / 2;
     bmp.regY = IMAGE_SIZE / 2;
     stage.addChild(bmp);
