@@ -56,9 +56,9 @@ FileUtils.cp_r(source_path + "js", '.')
 FileUtils.cp_r(source_path + "favicon.ico", '.')
 puts "end source copy"
 
-puts "start aws s3 upload"
-Dir.chdir('..')
-`aws s3 sync tempdir s3://pcl-manual-search-sorry --delete`
-`aws s3api put-bucket-policy --bucket pcl-manual-search-sorry --policy file://public.json`
-puts "end aws s3 upload"
+# puts "start aws s3 upload"
+# Dir.chdir('..')
+# `aws s3 sync tempdir s3://pcl-manual-search-sorry --delete`
+# `aws s3api put-bucket-policy --bucket pcl-manual-search-sorry --policy file://public.json`
+# puts "end aws s3 upload"
 # FileUtils.rm_rf('tempdir')
