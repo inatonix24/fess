@@ -10,7 +10,7 @@ node {
             sh 'cd fess && sudo ./apply_patch.sh'
         }
         stage('sorryページの作成') {
-            sh '/usr/local/rbenv/shims/ruby make_sorry_page.rb'
+            sh 'cd fess && /usr/local/rbenv/shims/ruby make_sorry_page.rb'
         }
         stage('Fessサービス起動') {
             sh 'sudo systemctl start fess'
