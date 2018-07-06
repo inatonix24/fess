@@ -37,6 +37,18 @@ puts "start modify html"
 FileUtils.sed_i(html_name, /;jsessionid.*[0-9A-Z]\"/, '"')
 FileUtils.sed_i(html_name, /src=\"\//, 'src="')
 FileUtils.sed_i(html_name, /href=\"\//, 'href="')
+FileUtils.sed_i(html_name, /<\/head>/, '<link rel="shortcut icon" href="favicon.ico" /></head>')
+disabled_form = <<-EOS
+<script>
+	$('#contentQuery').attr('disabled', true);
+	$('#searchButton').attr('disabled', true);
+	$('#searchOptionsButton').attr('disabled', true);
+	$(".notification").html("サービス時間外です。");
+</script>
+EOS
+open(html_name, 'a') {|f|
+    f.puts disabled_form
+}
 puts "end modify html"
 
 robots = <<-EOS
