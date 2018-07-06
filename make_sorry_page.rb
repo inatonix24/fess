@@ -44,6 +44,7 @@ disabled_form = <<-EOS
 	$('#searchButton').attr('disabled', true);
 	$('#searchOptionsButton').attr('disabled', true);
 	$(".notification").html("サービス時間外です。");
+	$(".help-link").css('visibility','hidden');
 </script>
 EOS
 open(html_name, 'a') {|f|
