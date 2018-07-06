@@ -56,12 +56,12 @@ ${fe:facetForm()}${fe:geoForm()}
 					</li>
 				</c:when>
 				<c:when test="${ pageLoginLink }">
-					<li class="nav-item"><la:link href="/login"
+					<!-- <li class="nav-item"><la:link href="/login"
 							styleClass="nav-link  " role="button" aria-haspopup="true"
 							aria-expanded="false">
 							<i class="fa fa-sign-in"></i>
 							<span><la:message key="labels.login" /></span>
-						</la:link></li>
+						</la:link></li> -->
 				</c:when>
 			</c:choose>
 			<li class="nav-item"><la:link href="/help" styleClass="nav-link" role="help" aria-haspopup="true"
