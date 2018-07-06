@@ -24,6 +24,8 @@ var mouseJoint = null;
 var ground = null;
 var mousePoint = new box2d.b2Vec2();
 var lastPressObject;
+var mouseX, mouseY;
+var isMouseDown = false;
 
 function init() {
     var canvas = document.getElementById("canvas");
@@ -31,83 +33,37 @@ function init() {
     canvas.setAttribute("height", STAGE_H + "px");
     stage = new createjs.Stage(canvas);
 
-    // enable touch action
-    if (createjs.Touch.isSupported()) {
-        createjs.Touch.enable(stage);
-    }
+    // // enable touch action
+    // if (createjs.Touch.isSupported()) {
+    //     createjs.Touch.enable(stage);
+    // }
 
     // init Physics
     setupPhysics();
 
-    createNeko();
+    canvas.addEventListener("mousedown", function(e) {
+        isMouseDown = true;
+        handleMouseMove(e);
+        canvas.addEventListener("mousemove", handleMouseMove, true);
+    }, true);
+    
+    canvas.addEventListener("mouseup", function() {
+        canvas.removeEventListener("mousemove", handleMouseMove, true);
+        isMouseDown = false;
+        mouseX = undefined;
+        mouseY = undefined;
+    }, true);
 
-    stage.onPress = handleMouseDown;
+    createNeko();
 
     createjs.Ticker.setFPS(60);
     createjs.Ticker.useRAF = true;
     createjs.Ticker.addEventListener("tick", handleTick);
 }
 
-
-function handleMouseDown(event) {
-    var mouseX = event.stageX;
-    var mouseY = event.stageY;
-    mousePoint.Set(mouseX / SCALE, mouseY / SCALE);
-    var hitBody = getBodyAtMouse();
-
-    if (hitBody) {
-        createNeko();
-
-        //if joint exists then create
-        var def = new box2d.b2MouseJointDef();
-
-        def.bodyA = ground;
-        def.bodyB = hitBody;
-        def.target = mousePoint;
-
-        def.collideConnected = true;
-        def.maxForce = 1000 * hitBody.GetMass();
-        def.dampingRatio = 0;
-
-        mouseJoint = world.CreateJoint(def);
-
-        lastPressObject = hitBody.GetUserData();
-        createjs.Tween.get(lastPressObject, {override:true})
-            .to({scaleX:1.4, scaleY:1.4}, 600, createjs.Ease.elasticOut);
-        stage.addChild(lastPressObject);
-
-        hitBody.SetAwake(true);
-    }
-
-    event.onMouseMove = handleMouseMove;
-    event.onMouseUp = handleMouseUp;
-}
-
-
-function handleMouseMove(event) {
-    // canvas 上の座標に変換
-    var mouseX = event.stageX;
-    var mouseY = event.stageY;
-    mousePoint.Set(mouseX / SCALE, mouseY / SCALE);
-
-    if (mouseJoint) {
-        mouseJoint.SetTarget(mousePoint);
-    }
-}
-function handleMouseUp(event) {
-    this.onMouseMove = this.onMouseUp = null; // dispose event handler
-
-    isMousePressed = false;
-
-    if (mouseJoint) {
-        world.DestroyJoint(mouseJoint);
-        mouseJoint = false;
-
-        if (lastPressObject) {
-            createjs.Tween.get(lastPressObject, {override:true})
-                .to({scaleX:1, scaleY:1}, 300, createjs.Ease.cubicOut);
-        }
-    }
+function handleMouseMove(e) {
+    mouseX = (e.clientX - canvas.getBoundingClientRect().left) / SCALE;
+    mouseY = (e.clientY - canvas.getBoundingClientRect().top) / SCALE;
 }
 
 function createNeko() {
@@ -209,10 +165,10 @@ function createBox(x, y) {
 
 
 function getBodyAtMouse(includeStatic) {
+    mousePoint = new box2d.b2Vec2(mouseX, mouseY);
     var aabb = new box2d.b2AABB();
-    aabb.lowerBound.Set(mousePoint.x - 0.001, mousePoint.y - 0.001);
-    aabb.upperBound.Set(mousePoint.x + 0.001, mousePoint.y + 0.001);
-
+    aabb.lowerBound.Set(mouseX - 0.001, mouseY - 0.001);
+    aabb.upperBound.Set(mouseX + 0.001, mouseY + 0.001);
     var body = null;
 
     // Query the world for overlapping shapes.
@@ -236,6 +192,52 @@ function getBodyAtMouse(includeStatic) {
 }
 
 function handleTick() {
+
+    // マウスが押されていて、マウスジョイントが作成されていない場合
+    if(isMouseDown && (!mouseJoint)) {
+        if(isMouseDown) {                
+            var hitBody = getBodyAtMouse();
+    
+            if (hitBody) {
+                createNeko();
+        
+                //if joint exists then create
+                var def = new box2d.b2MouseJointDef();
+        
+                def.bodyA = ground;
+                def.bodyB = hitBody;
+                def.target.Set(mouseX, mouseY); // マウスジョイント位置
+        
+                def.collideConnected = true;
+                def.maxForce = 1000 * hitBody.GetMass();
+                def.dampingRatio = 0;
+        
+                mouseJoint = world.CreateJoint(def);
+        
+                lastPressObject = hitBody.GetUserData();
+                createjs.Tween.get(lastPressObject, {override:true})
+                    .to({scaleX:1.4, scaleY:1.4}, 600, createjs.Ease.elasticOut);
+                stage.addChild(lastPressObject);
+        
+                hitBody.SetAwake(true);
+            }
+        }
+    }
+    if(mouseJoint) {
+            // マウスドラッグしたとき
+            if(isMouseDown) {                
+                mouseJoint.SetTarget(new box2d.b2Vec2(mouseX, mouseY));
+            } 
+            // ドロップしたとき
+            else {
+                world.DestroyJoint(mouseJoint);
+                mouseJoint = null;
+                if (lastPressObject) {
+                    createjs.Tween.get(lastPressObject, {override:true})
+                        .to({scaleX:1, scaleY:1}, 300, createjs.Ease.cubicOut);
+                }
+            }
+    }
 
     world.Step(1 / 60, 10, 10);
 
