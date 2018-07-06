@@ -69,14 +69,14 @@
 								</div>
 							</li>
 						</c:when>
-						<c:when test="${ pageLoginLink }">
+						<!-- <c:when test="${ pageLoginLink }">
 							<li class="nav-item username"><la:link href="/login"
 									styleClass="nav-link" role="button" aria-haspopup="true"
 									aria-expanded="false">
 									<i class="fa fa-sign-in"></i>
 									<la:message key="labels.login" />
 								</la:link></li>
-						</c:when>
+						</c:when> -->
 					</c:choose>
 					<li class="nav-item"><la:link href="/help"
 							styleClass="nav-link help-link">
