@@ -18,12 +18,8 @@ var stage, world;
 var STAGE_W = window.innerWidth;
 var STAGE_H = window.innerHeight - 120;
 var GROUND_W = STAGE_W;
-var GROUND_H = STAGE_H - 35
-if (STAGE_W > 800) {
-    var IMAGE_SIZE_RATIO = 1;
-} else {
-    var IMAGE_SIZE_RATIO = STAGE_W / 800;
-}
+var GROUND_H = STAGE_H - 35;
+var IMAGE_SIZE_RATIO = 0.2;
 var mouseJoint = null;
 var ground = null;
 var mousePoint = new box2d.b2Vec2();
@@ -38,6 +34,14 @@ function init() {
     var canvas = document.getElementById("canvas");
     canvas.setAttribute("width", STAGE_W + "px");
     canvas.setAttribute("height", STAGE_H + "px");
+    canvas.width *= devicePixelRatio;
+    canvas.height *= devicePixelRatio;
+    canvas.style.width = String(canvas.width / devicePixelRatio) + "px";
+    canvas.style.height = String(canvas.height / devicePixelRatio) + "px";
+    STAGE_W *= devicePixelRatio;
+    STAGE_H *= devicePixelRatio;
+    GROUND_W *= devicePixelRatio;
+    GROUND_H *= devicePixelRatio;
     stage = new createjs.Stage(canvas);
     setupPhysics();
     addEvent(canvas);
@@ -87,8 +91,8 @@ function handleMouseMove(e) {
         clientX = e.clientX
         clientY = e.clientY   
     }
-    mouseX = (clientX - canvas.getBoundingClientRect().left) / SCALE;
-    mouseY = (clientY - canvas.getBoundingClientRect().top) / SCALE;
+    mouseX = (clientX - canvas.getBoundingClientRect().left) / SCALE * devicePixelRatio;
+    mouseY = (clientY - canvas.getBoundingClientRect().top) / SCALE * devicePixelRatio;
 }
 
 function createNeko() {
@@ -107,7 +111,7 @@ function createNeko() {
         fixDef.restitution = 0.7;
         var bodyDef = new box2d.b2BodyDef();
         bodyDef.type = box2d.b2Body.b2_dynamicBody;
-        bodyDef.position.x = GROUND_W / SCALE + 5;
+        bodyDef.position.x = GROUND_W / SCALE + 5 * devicePixelRatio;
         bodyDef.position.y = (Math.random() * 100 + 0) / SCALE;
         bodyDef.userData = bmp;
         fixDef.shape = new box2d.b2CircleShape(bmp.image.height * IMAGE_SIZE_RATIO / 2 / SCALE);
