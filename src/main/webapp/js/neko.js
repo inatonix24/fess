@@ -111,8 +111,8 @@ function createNeko() {
         fixDef.restitution = 0.7;
         var bodyDef = new box2d.b2BodyDef();
         bodyDef.type = box2d.b2Body.b2_dynamicBody;
-        bodyDef.position.x = GROUND_W / SCALE + 5 * devicePixelRatio;
-        bodyDef.position.y = (Math.random() * 100 + 0) / SCALE;
+        bodyDef.position.x = (Math.random() * 1.5 * GROUND_W + Math.random() * - 0.5 * GROUND_W) / SCALE;
+        bodyDef.position.y = (Math.random() * -100) / SCALE;
         bodyDef.userData = bmp;
         fixDef.shape = new box2d.b2CircleShape(bmp.image.height * IMAGE_SIZE_RATIO / 2 / SCALE);
         world.CreateBody(bodyDef).CreateFixture(fixDef);
@@ -132,10 +132,10 @@ function setupPhysics() {
     debugDraw.SetFlags(box2d.b2DebugDraw.e_shapeBit | box2d.b2DebugDraw.e_jointBit);// 何をデバッグ描画するか
     world.SetDebugDraw(debugDraw);
     
-    createWall(STAGE_W / 2, 0, STAGE_W, 0.01);
-    createWall(0, GROUND_H / 2, 0.01, GROUND_H);
-    createWall2(STAGE_W / SCALE, GROUND_H / SCALE);
+    createWall2(STAGE_W / SCALE, GROUND_H / SCALE, Math.PI * 0.25);
+    createWall2(0, GROUND_H / SCALE, Math.PI * -0.25);
     createBox(STAGE_W / SCALE, GROUND_H / SCALE);
+    createBox(0, GROUND_H / SCALE);
     ground = createWall(STAGE_W / 2, GROUND_H, GROUND_W, 0.01);
 }
 
