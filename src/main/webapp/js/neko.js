@@ -163,11 +163,10 @@ function createWall(x, y, w, h) {
     return ground;
 }
 
-function createWall2(x, y, w, h) {
+function createWall2(x, y, angle) {
     var fixDef = new box2d.b2FixtureDef(0);
     fixDef.density = 1;
     fixDef.friction = 0.5;
-    var angle = Math.PI * 0.25
     var bodyDef = new box2d.b2BodyDef();
     bodyDef.type = box2d.b2Body.b2_staticBody;
     bodyDef.position.y = (y-1)/ 2;
