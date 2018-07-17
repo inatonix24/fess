@@ -111,7 +111,7 @@ function createNeko() {
         fixDef.restitution = 0.7;
         var bodyDef = new box2d.b2BodyDef();
         bodyDef.type = box2d.b2Body.b2_dynamicBody;
-        bodyDef.position.x = (Math.random() * 1.5 * GROUND_W + Math.random() * - 0.5 * GROUND_W) / SCALE;
+        bodyDef.position.x = (Math.random() * 2 * GROUND_W - GROUND_W / 2) / SCALE;
         bodyDef.position.y = (Math.random() * -100) / SCALE;
         bodyDef.userData = bmp;
         fixDef.shape = new box2d.b2CircleShape(bmp.image.height * IMAGE_SIZE_RATIO / 2 / SCALE);
