@@ -71,6 +71,7 @@ template {
   color: #fff;
   font-size: 25px;
   font-family: 'Futura';
+  -ms-font-feature-settings: "normal";
   visibility: hidden;
 }
 
