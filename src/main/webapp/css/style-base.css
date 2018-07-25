@@ -68,11 +68,12 @@ template {
 
 #nekocount {
   font-size: 25px;
+  visibility: hidden;
   text-decoration: none;
   color: #fff;
   font-family: Monoton, sans-serif;
   -webkit-animation: neon1 1.2s ease-in-out infinite alternate;
-  animation: neon1 1.2s ease-in-out infinite alternate;  
+  animation: neon1 1.2s ease-in-out infinite alternate; 
 }
 
 /*glow for webkit*/
