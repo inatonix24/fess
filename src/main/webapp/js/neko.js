@@ -77,7 +77,10 @@ function updateCount(docClient, params) {
             var newCount = data.Item.nekocount
             if(isNaN(nowCount) || nowCount < newCount) {
                 $("#nekocount").html(newCount);
-                isNekocountready = true;
+                if(!isNekocountready) {
+                    $("#nekocount").css('visibility', 'visible')
+                    isNekocountready = true;
+                }
             }
         }
     });
