@@ -80,6 +80,8 @@ function updateCount(docClient, params) {
                 if(!isNekocountready) {
                     $("#nekocount").addClass('magictime vanishIn');
                     $("#nekocount").css('visibility', 'visible')
+                    $("#nekocount").css('-webkit-animation', 'neon1 1.2s ease-in-out infinite alternate');
+                    $("#nekocount").css('animation', 'neon1 1.2s ease-in-out infinite alternate');
                     isNekocountready = true;
                     setTimeout(function (){
                         //firefoxだとなぜか少し待ってから値を更新しないとcssが変になる場合がある
