@@ -69,6 +69,7 @@ template {
 #nekocount {
   font-size: 25px;
   visibility: hidden;
+  text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 10px #23a36e, 0 0 20px #23a36e, 0 0 30px #23a36e;
   text-decoration: none;
   color: #fff;
   font-family: Monoton, sans-serif;
