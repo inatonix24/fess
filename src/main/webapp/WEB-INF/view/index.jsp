@@ -176,6 +176,7 @@
 	<script type="text/javascript" src="${fe:url('/js/index.js')}"></script>
 	<script type="text/javascript" src="${fe:url('/js/createjs-2013.02.12.min.js')}"></script>
 	<script type="text/javascript" src="${f:url('/js/box2dweb.js')}"></script>
+	<script type="text/javascript" src="${f:url('/js/aws-sdk-2.280.1.min.js')}"></script>
 	<script type="text/javascript" src="${f:url('/js/neko.js')}"></script>
 </body>
 </html>
