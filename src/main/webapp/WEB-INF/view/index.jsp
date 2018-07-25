@@ -42,7 +42,7 @@
 		${fe:facetForm()}${fe:geoForm()}
 		<nav class="navbar navbar-dark bg-inverse navbar-static-top pos-f-t">
 			<div id="content" class="container" style="text-align: center">
-				<span id="nekocount" class="nav navbar"></span>
+				<span id="nekocount"></span>
 				<ul class="nav navbar-nav pull-right">
 					<c:choose>
 						<c:when test="${!empty username && username != 'guest'}">

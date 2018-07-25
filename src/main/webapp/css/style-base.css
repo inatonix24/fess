@@ -66,6 +66,10 @@ template {
   z-index: 0;
 }
 
+#nekocount {
+  color: #0a8652
+}
+
 .noselect {
   user-select: none; /* CSS3 */
   -moz-user-select: none; /* Firefox */
