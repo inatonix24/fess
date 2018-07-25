@@ -67,7 +67,9 @@ template {
 }
 
 #nekocount {
-  color: #0a8652
+  text-shadow: 0 0 2px #fff, 0 0 5px #fff, 0 0 10px #23a36e, 0 0 20px #23a36e, 0 0 30px #23a36e, 0 0 40px #23a36e, 0 0 50px #23a36e;
+  color: #fff;
+  font-size: 25px;
 }
 
 .noselect {
