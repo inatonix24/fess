@@ -41,8 +41,8 @@
 		styleId="searchForm">
 		${fe:facetForm()}${fe:geoForm()}
 		<nav class="navbar navbar-dark bg-inverse navbar-static-top pos-f-t">
-			<div id="content" class="container">
-				<span id="nekocount" class="nav"></span>
+			<div id="content" class="container" style="text-align: center">
+				<span id="nekocount" class="nav navbar"></span>
 				<ul class="nav navbar-nav pull-right">
 					<c:choose>
 						<c:when test="${!empty username && username != 'guest'}">
@@ -79,11 +79,11 @@
 								</la:link></li> -->
 						</c:when>
 					</c:choose>
-					<li class="nav-item"><la:link href="/help"
+					<!-- <li class="nav-item"><la:link href="/help"
 							styleClass="nav-link help-link">
 							<i class="fa fa-question-circle"></i>
 							<la:message key="labels.index_help" />
-						</la:link></li>
+						</la:link></li> -->
 				</ul>
 			</div>
 		</nav>
