@@ -29,8 +29,13 @@ var isMouseDown = false;
 var isMobile = ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf('iPad') == -1) 
     || navigator.userAgent.indexOf('iPod') > 0 
     || navigator.userAgent.indexOf('Android') > 0)
+var isNekocountready = false;
+var addedNekocount = 0;
+var isNekocountupdating = false;
 
 function init() {
+    setInterval(getNekocount, 1000);
+    setInterval(updateNekocount, 1000);
     var canvas = document.getElementById("canvas");
     canvas.setAttribute("width", STAGE_W + "px");
     canvas.setAttribute("height", STAGE_H + "px");
@@ -49,6 +54,91 @@ function init() {
     createjs.Ticker.setFPS(60);
     createjs.Ticker.useRAF = true;
     createjs.Ticker.addEventListener("tick", handleTick);
+}
+
+function initAWSconfig() {
+    AWS.config.update({
+        region: "us-east-1",
+    });
+    AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: "us-east-1:7019adee-e4b3-44a4-852d-5de814122221",
+        RoleArn: "arn:aws:iam::931594971096:role/Cognito_DynamoPoolUnauth"
+    });
+    var docClient = new AWS.DynamoDB.DocumentClient();
+    return docClient;
+}
+
+function updateCount(docClient, params) {
+    docClient.get(params, function(err, data) {
+        if (err) {
+            console.error(err)
+        } else {
+            var nowCount = parseInt($("#nekocount").text())
+            var newCount = data.Item.nekocount
+            if(isNaN(nowCount) || nowCount < newCount) {
+                $("#nekocount").html(newCount);
+                isNekocountready = true;
+            }
+        }
+    });
+}
+
+function getNekocount() {
+    var docClient = initAWSconfig();
+    AWS.config.credentials.get(function(error) {
+        if (!error) {
+            var params = {
+                TableName :"Nekocount",
+                Key:{
+                    "id": 0
+                }
+            };
+            updateCount(docClient, params);
+        }
+    })
+}
+
+function updateNekocount() {
+    if(!isNekocountupdating && addedNekocount !== 0) {
+        isNekocountupdating = true;
+        var docClient = initAWSconfig();
+        AWS.config.credentials.get(function(error) {
+            if (!error) {
+                var tempCount = addedNekocount;
+                var params = {
+                    TableName :"Nekocount",
+                    Key:{
+                        "id": 0
+                    },
+                    UpdateExpression: "set nekocount = nekocount + :val",
+                    ExpressionAttributeValues:{
+                        ":val": tempCount
+                    },
+                    ReturnValues:"UPDATED_NEW"
+                };
+                docClient.update(params, function(err, data) {
+                    if (err) {
+                        console.error(err)
+                    } else {
+                        addedNekocount = addedNekocount - tempCount;
+                    }
+                    function afterUpdate () {
+                        isNekocountupdating = false;
+                    }
+                    setTimeout(afterUpdate(), 2000);
+                });
+            }
+        })
+    }
+}
+
+function addNekocount() {
+    //isNekocountready falseの場合もカウントをキャッシュした方がいいか。
+    //現状だとカウントが表示されるまでにクリックしてもカウントされない。
+    if(isNekocountready) {
+        addedNekocount += 1;
+        $("#nekocount").html(parseInt($("#nekocount").text()) + 1);
+    }
 }
 
 function addEvent(element) {
@@ -111,6 +201,7 @@ function createNeko() {
         fixDef.restitution = 0.7;
         var bodyDef = new box2d.b2BodyDef();
         bodyDef.type = box2d.b2Body.b2_dynamicBody;
+        // bodyDef.position.x = (Math.random() * 1.5 * GROUND_W + Math.random() * - 0.5 * GROUND_W) / SCALE;
         bodyDef.position.x = (Math.random() * 2 * GROUND_W - GROUND_W / 2) / SCALE;
         bodyDef.position.y = (Math.random() * -100) / SCALE;
         bodyDef.userData = bmp;
@@ -118,6 +209,7 @@ function createNeko() {
         world.CreateBody(bodyDef).CreateFixture(fixDef);
     }
     canvasImage.src = "images/nekobean.png";
+    addNekocount();
 }
 
 function setupPhysics() {
