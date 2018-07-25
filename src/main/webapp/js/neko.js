@@ -19,7 +19,6 @@ var STAGE_W = window.innerWidth;
 var STAGE_H = window.innerHeight - 120;
 var GROUND_W = STAGE_W;
 var GROUND_H = STAGE_H - 35;
-var IMAGE_SIZE_RATIO = 0.2;
 var mouseJoint = null;
 var ground = null;
 var mousePoint = new box2d.b2Vec2();
@@ -206,6 +205,8 @@ function createNeko() {
         bmp.regY = bmp.image.height / 2 ;
         bmp.scaleX = IMAGE_SIZE_RATIO;
         bmp.scaleY = IMAGE_SIZE_RATIO;
+        bmp.scaleXorg = bmp.scaleX;
+        bmp.scaleYorg = bmp.scaleY;
         stage.addChild(bmp);
         
         var fixDef = new box2d.b2FixtureDef(0);
@@ -214,14 +215,32 @@ function createNeko() {
         fixDef.restitution = 0.7;
         var bodyDef = new box2d.b2BodyDef();
         bodyDef.type = box2d.b2Body.b2_dynamicBody;
-        // bodyDef.position.x = (Math.random() * 1.5 * GROUND_W + Math.random() * - 0.5 * GROUND_W) / SCALE;
         bodyDef.position.x = (Math.random() * 2 * GROUND_W - GROUND_W / 2) / SCALE;
         bodyDef.position.y = (Math.random() * -100) / SCALE;
         bodyDef.userData = bmp;
         fixDef.shape = new box2d.b2CircleShape(bmp.image.height * IMAGE_SIZE_RATIO / 2 / SCALE);
         world.CreateBody(bodyDef).CreateFixture(fixDef);
     }
-    canvasImage.src = "images/nekobean.png";
+    var x = Math.random();
+    var mameRatio = 8;
+    if(x > mameRatio / 100){
+        canvasImage.src = "images/nekobean.png";
+        IMAGE_SIZE_RATIO = 0.2;
+    }else{
+        canvasImage.src = "images/mame.png";
+        IMAGE_SIZE_RATIO = 0.37;
+
+    }
+    var clickedCount = (parseInt($("#nekocount").text()) + 1)
+    if((clickedCount % 100) === 0) {
+        IMAGE_SIZE_RATIO *= 3;
+        if((clickedCount % 1000) === 0) {
+            IMAGE_SIZE_RATIO *= 2;
+            if((clickedCount % 10000) === 0) {
+                IMAGE_SIZE_RATIO *= 2;
+            }
+        }
+    }
     addNekocount();
 }
 
@@ -352,7 +371,7 @@ function handleTick() {
     
             lastPressObject = hitBody.GetUserData();
             createjs.Tween.get(lastPressObject, {override:true})
-                .to({scaleX:IMAGE_SIZE_RATIO * 1.4, scaleY:IMAGE_SIZE_RATIO * 1.4}, 600, createjs.Ease.elasticOut);
+                .to({scaleX:lastPressObject.scaleX * 1.4, scaleY:lastPressObject.scaleY * 1.4}, 600, createjs.Ease.elasticOut);
             stage.addChild(lastPressObject);
     
             hitBody.SetAwake(true);
@@ -369,7 +388,7 @@ function handleTick() {
             mouseJoint = null;
             if (lastPressObject) {
                 createjs.Tween.get(lastPressObject, {override:true})
-                    .to({scaleX:IMAGE_SIZE_RATIO, scaleY:IMAGE_SIZE_RATIO}, 300, createjs.Ease.cubicOut);
+                    .to({scaleX:lastPressObject.scaleXorg, scaleY:lastPressObject.scaleYorg }, 500, createjs.Ease.cubicOut);
             }
         }
     }
