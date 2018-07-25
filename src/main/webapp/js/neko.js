@@ -76,11 +76,17 @@ function updateCount(docClient, params) {
             var nowCount = parseInt($("#nekocount").text())
             var newCount = data.Item.nekocount
             if(isNaN(nowCount) || nowCount < newCount) {
-                $("#nekocount").html(newCount);
+                $("#nekocount").html(newCount)
                 if(!isNekocountready) {
                     $("#nekocount").addClass('magictime vanishIn');
                     $("#nekocount").css('visibility', 'visible')
                     isNekocountready = true;
+                    setTimeout(function (){
+                        //firefoxだとなぜか少し待ってから値を更新しないとcssが変になる場合がある
+                        console.log("bebebebe")
+                        var temp = $("#nekocount").text()
+                        $("#nekocount").html(temp)
+                    },1100)//検証して最短の時間
                 }
             }
         }
