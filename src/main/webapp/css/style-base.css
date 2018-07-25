@@ -71,18 +71,19 @@ template {
   text-decoration: none;
   color: #fff;
   font-family: Monoton, sans-serif;
-  -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
-  animation: neon1 1.5s ease-in-out infinite alternate;  
-  visibility: hidden;
+  -webkit-animation: neon1 1.2s ease-in-out infinite alternate;
+  animation: neon1 1.2s ease-in-out infinite alternate;  
 }
 
+/*glow for webkit*/
+
 @-webkit-keyframes neon1 {
-  from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #23a36e, 0 0 70px #23a36e, 0 0 80px #23a36e, 0 0 100px #23a36e, 0 0 150px #23a36e;
-  }
-  to {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #23a36e, 0 0 35px #23a36e, 0 0 40px #23a36e, 0 0 50px #23a36e, 0 0 75px #23a36e;
-  }
+    from {
+        text-shadow: 0 0 15px #fff, 0 0 20px #8ea89d, 0 0 30px #23a36e, 0 0 40px #23a36e, 0 0 50px #09945a, 0 0 60px #23a36e;
+      }
+      to {
+        text-shadow: 0 0 7px #fff,  0 0 10px #8ea89d, 0 0 15px #23a36e, 0 0 20px #23a36e, 0 0 25px #09945a, 0 0 30px #23a36e;
+      }
 }
 
 /*glow for mozilla*/
@@ -90,10 +91,10 @@ template {
 
 @keyframes neon1 {
   from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #23a36e, 0 0 70px #23a36e, 0 0 80px #23a36e, 0 0 100px #23a36e, 0 0 150px #23a36e;
+    text-shadow: 0 0 15px #fff, 0 0 20px #8ea89d, 0 0 30px #23a36e, 0 0 40px #23a36e, 0 0 50px #09945a, 0 0 60px #23a36e;
   }
   to {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #23a36e, 0 0 35px #23a36e, 0 0 40px #23a36e, 0 0 50px #23a36e, 0 0 75px #23a36e;
+    text-shadow: 0 0 7px #fff,  0 0 10px #8ea89d, 0 0 15px #23a36e, 0 0 20px #23a36e, 0 0 25px #09945a, 0 0 30px #23a36e;
   }
 }
 
