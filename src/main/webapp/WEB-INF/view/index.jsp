@@ -25,7 +25,8 @@
 	type="text/css" />
 <link href="${fe:url('/css/style.css')}" rel="stylesheet" type="text/css" />
 <link href="${fe:url('/css/font-awesome.min.css')}" rel="stylesheet"
-	type="text/css" />
+type="text/css" />
+<link href="${fe:url('/css/magic.min.css')}" rel="stylesheet" type="text/css" />
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
 <style>
 	body {
