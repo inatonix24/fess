@@ -83,7 +83,6 @@ function updateCount(docClient, params) {
                     isNekocountready = true;
                     setTimeout(function (){
                         //firefoxだとなぜか少し待ってから値を更新しないとcssが変になる場合がある
-                        console.log("bebebebe")
                         var temp = $("#nekocount").text()
                         $("#nekocount").html(temp)
                     },1100)//検証して最短の時間
@@ -135,7 +134,9 @@ function updateNekocount() {
                     function afterUpdate () {
                         isNekocountupdating = false;
                     }
-                    setTimeout(afterUpdate(), 2000);
+                    setTimeout(function() {
+                        isNekocountupdating = false;
+                    }, 2000);
                 });
             }
         })
