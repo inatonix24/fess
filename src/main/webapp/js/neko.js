@@ -251,7 +251,7 @@ function updateNekocount() {
                                         function() {
                                             updateCount(docClient, params)
                                         },
-                                        3000)
+                                        1000)
                                 }
                             })
                         }
