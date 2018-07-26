@@ -38,7 +38,6 @@ type="text/css" />
 </style>
 </head>
 <body onload="init();">
-		<a href="javascript:localStorage['exceptme']='1';">except</a>
 	<la:form styleClass="form-stacked" action="search" method="get"
 		styleId="searchForm">
 		${fe:facetForm()}${fe:geoForm()}
