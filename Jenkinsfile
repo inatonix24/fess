@@ -3,6 +3,9 @@ node {
         stage('ソースの取得') {
             sh 'git clone -b pcl-manual-search https://github.com/inayuky/fess.git'
         }
+        stage('js/cssの圧縮') {
+            sh 'cd fess && sudo ./minify.sh'
+        }
         stage('パッチの適用') {
             sh 'cd fess && sudo ./apply_patch.sh'
         }
