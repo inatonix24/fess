@@ -200,6 +200,26 @@ function handleMouseMove(e) {
 
 function createNeko() {
     var canvasImage = new Image();
+    var x = Math.random();
+    var mameRatio = 8;
+    var imageSrc = null;
+    if(x > mameRatio / 100){
+        imageSrc = "images/nekobean.png";
+        IMAGE_SIZE_RATIO = 0.2;
+    }else{
+        imageSrc = "images/mame.png";
+        IMAGE_SIZE_RATIO = 0.37;
+    }
+    var clickedCount = (parseInt($("#nekocount").text()) + 1)
+    if((clickedCount % 100) === 0) {
+        IMAGE_SIZE_RATIO *= 3;
+        if((clickedCount % 1000) === 0) {
+            IMAGE_SIZE_RATIO *= 2;
+            if((clickedCount % 10000) === 0) {
+                IMAGE_SIZE_RATIO *= 2;
+            }
+        }
+    }
     canvasImage.onload = function() {
         var bmp = new createjs.Bitmap(canvasImage);
         bmp.regX = bmp.image.width / 2;
@@ -221,26 +241,6 @@ function createNeko() {
         bodyDef.userData = bmp;
         fixDef.shape = new box2d.b2CircleShape(bmp.image.height * IMAGE_SIZE_RATIO / 2 / SCALE);
         world.CreateBody(bodyDef).CreateFixture(fixDef);
-    }
-    var x = Math.random();
-    var mameRatio = 8;
-    var imageSrc = null;
-    if(x > mameRatio / 100){
-        IMAGE_SIZE_RATIO = 0.2;
-        imageSrc = "images/nekobean.png";
-    }else{
-        IMAGE_SIZE_RATIO = 0.37;
-        imageSrc = "images/mame.png";
-    }
-    var clickedCount = (parseInt($("#nekocount").text()) + 1)
-    if((clickedCount % 100) === 0) {
-        IMAGE_SIZE_RATIO *= 3;
-        if((clickedCount % 1000) === 0) {
-            IMAGE_SIZE_RATIO *= 2;
-            if((clickedCount % 10000) === 0) {
-                IMAGE_SIZE_RATIO *= 2;
-            }
-        }
     }
     canvasImage.src = imageSrc
     addNekocount();
