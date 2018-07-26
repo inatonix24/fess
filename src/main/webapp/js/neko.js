@@ -224,13 +224,13 @@ function createNeko() {
     }
     var x = Math.random();
     var mameRatio = 8;
+    var imageSrc = null;
     if(x > mameRatio / 100){
-        canvasImage.src = "images/nekobean.png";
         IMAGE_SIZE_RATIO = 0.2;
+        imageSrc = "images/nekobean.png";
     }else{
-        canvasImage.src = "images/mame.png";
         IMAGE_SIZE_RATIO = 0.37;
-
+        imageSrc = "images/mame.png";
     }
     var clickedCount = (parseInt($("#nekocount").text()) + 1)
     if((clickedCount % 100) === 0) {
@@ -242,6 +242,7 @@ function createNeko() {
             }
         }
     }
+    canvasImage.src = imageSrc
     addNekocount();
 }
 
