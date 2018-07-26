@@ -33,7 +33,7 @@ var addedNekocount = 0;
 var isNekocountupdating = false;
 
 function init() {
-    setInterval(getNekocount, 1000);
+    setInterval(getNekocount, 3000);
     setInterval(updateNekocount, 1000);
     var canvas = document.getElementById("canvas");
     canvas.setAttribute("width", STAGE_W + "px");
