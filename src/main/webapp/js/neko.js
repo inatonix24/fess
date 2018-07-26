@@ -199,7 +199,6 @@ function handleMouseMove(e) {
 }
 
 function createNeko() {
-    var canvasImage = new Image();
     var x = Math.random();
     var mameRatio = 8;
     var imageSrc = null;
@@ -220,6 +219,7 @@ function createNeko() {
             }
         }
     }
+    var canvasImage = new Image();
     canvasImage.onload = function() {
         var bmp = new createjs.Bitmap(canvasImage);
         bmp.regX = bmp.image.width / 2;
