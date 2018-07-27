@@ -77,7 +77,8 @@ function updateCount(docClient, params) {
             if(isNaN(nowCount) || nowCount < newCount) {
                 $("#nekocount").html(newCount)
                 if(!isNekocountready) {
-                    $("#nekocount").addClass('magictime vanishIn');
+                    $("#nekocount").css('-webkit-animation', 'fadeIn 2s ease 0s 1 normal');
+                    $("#nekocount").css('animation', 'fadeIn 2s ease 0s 1 normal');
                     $("#nekocount").css('visibility', 'visible')
                     isNekocountready = true;
                     setTimeout(function (){

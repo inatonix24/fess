@@ -75,6 +75,16 @@ template {
   font-family: Monoton, sans-serif;
 }
 
+@keyframes fadeIn {
+  0% {opacity: 0}
+  100% {opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0}
+  100% {opacity: 1}
+}
+
 /*glow for webkit*/
 
 @-webkit-keyframes neon {
