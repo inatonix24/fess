@@ -73,6 +73,8 @@ template {
   text-decoration: none;
   color: #fff;
   font-family: Monoton, sans-serif;
+  animation: neon 1.2s ease-in-out infinite alternate;
+  -webkit-animation: neon 1.2s ease-in-out infinite alternate;
 }
 
 @keyframes fadeIn {

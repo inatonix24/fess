@@ -77,16 +77,14 @@ function updateCount(docClient, params) {
             if(isNaN(nowCount) || nowCount < newCount) {
                 $("#nekocount").html(newCount)
                 if(!isNekocountready) {
-                    $("#nekocount").css('-webkit-animation', 'fadeIn 2s ease 0s 1 normal');
-                    $("#nekocount").css('animation', 'fadeIn 2s ease 0s 1 normal');
                     $("#nekocount").css('visibility', 'visible')
                     isNekocountready = true;
                     setTimeout(function (){
                         //firefoxだとなぜか少し待ってから値を更新しないとcssが変になる場合がある
                         var temp = $("#nekocount").text()
                         $("#nekocount").html(temp)
-                        $("#nekocount").css('-webkit-animation', 'neon 1.2s ease-in-out infinite alternate');
-                        $("#nekocount").css('animation', 'neon 1.2s ease-in-out infinite alternate');
+                        // $("#nekocount").css('-webkit-animation', 'neon 1.2s ease-in-out infinite alternate');
+                        // $("#nekocount").css('animation', 'neon 1.2s ease-in-out infinite alternate');
                     },1100)//検証して最短の時間
                 }
             }
