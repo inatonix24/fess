@@ -27,7 +27,6 @@
 <link href="${fe:url('/css/font-awesome.min.css')}" rel="stylesheet"
 type="text/css" />
 <link href="${fe:url('/css/magic.min.css')}" rel="stylesheet" type="text/css" />
-<link href='https://fonts.googleapis.com/css?family=Cabin+Condensed:700' rel='stylesheet' type='text/css'>
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0" />
 <style>
 	body {
@@ -97,47 +96,8 @@ type="text/css" />
 				<div class="row content">
 					<div class="center-block searchFormBox">
 						<h1 class="mainLogo noselect">
-							<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-								width="720px" height="200px" xml:space="preserve">
-							 <defs>
-							   <pattern id="water" width=".25" height="1.1" patternContentUnits="objectBoundingBox">
-								 <path fill="green" d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"/>
-							   </pattern>
-							   
-							   <pattern id="water2" width=".25" height="1.1" patternContentUnits="objectBoundingBox">
-									   <path fill="#65C580" d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"/>
-							   </pattern>
-				   
-							   <text id="text" transform="translate(2,116)" font-family="'Cabin Condensed'" font-size="84">PCL Manual Search</text>
-							   
-							   <mask id="text-mask">
-								 <use x="0" y="0" xlink:href="#text" opacity="1" fill="#ffff"/>
-							   </mask>
-							   
-							   <g id="eff">
-								 <use x="0" y="0" xlink:href="#text" fill="#a2a3a5"/>
-								   <rect class="water-fill" mask="url(#text-mask)" fill="url(#water2)" x="-300" y="40" width="1200" height="120" opacity="0.3">
-									   <animate attributeType="xml" attributeName="x" from="-300" to="0" repeatCount="indefinite" dur="2.4s"/>
-								   </rect>
-								   <rect class="water-fill" mask="url(#text-mask)" fill="url(#water2)" y="60" width="1600" height="120" opacity="0.3">
-									   <animate attributeType="xml" attributeName="x" from="-400" to="0" repeatCount="indefinite" dur="5s"/>
-								   </rect>
-									   
-								   <rect class="water-fill" mask="url(#text-mask)" fill="url(#water)" y="70" width="800" height="120" opacity="0.3">
-									   <animate attributeType="xml" attributeName="x" from="-200" to="0" repeatCount="indefinite" dur="3s"/>
-								   </rect>
-									   <rect class="water-fill" mask="url(#text-mask)" fill="url(#water)" y="80" width="2000" height="120" opacity="0.3">
-									   <animate attributeType="xml" attributeName="x" from="-500" to="0" repeatCount="indefinite" dur="6s"/>
-								   </rect>
-							   </g>
-							 </defs>
-							
-								 <use xlink:href="#eff" opacity="0.9" style="mix-blend-mode:color-burn"/>
-						   
-						   </svg>
-
-
-
+							<img src="${fe:url('/images/logo.png')}"
+								alt="<la:message key="labels.index_title" />" />
 						</h1>
 						<div class="notification">${notification}</div>
 						<div>
