@@ -8,6 +8,7 @@ minify () {
 minify js/bootstrap.js
 minify js/suggestor.js
 minify js/box2dweb.js
+minify js/neko-count.js
 minify js/neko.js
 
 minify css/style-base.css
