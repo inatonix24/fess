@@ -13,7 +13,7 @@ node {
             sh 'sudo systemctl restart fess'
         }
         stage('Fessサービス起動確認') {
-            sh 'sudo ./check_http_response.sh'
+            sh 'cd fess && sudo ./check_http_response.sh'
         }
         stage('sorryページの作成') {
             sh 'cd fess && /usr/local/rbenv/shims/ruby make_sorry_page.rb'
