@@ -1,13 +1,13 @@
 #!/bin/bash
 
-check=1
-while [ !$check ]
+ret=0
+while [ $ret ]
 do
   echo check response
-  check=`curl http://localhost 2>&1 | grep -v "Connection refused"`
-  echo $check
+  curl http://localhost 2>&1 | grep "Connection refused"
+  ret=$?
+  sleep 0.5
   # curl -LI http://localhost -o /dev/null -w '%{http_code}\n' -s
   # code=`curl -LI http://localhost -o /dev/null -w '%{http_code}\n' -s`
   # echo response code = $code
-  sleep 0.5
 done
