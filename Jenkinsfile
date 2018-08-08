@@ -9,6 +9,12 @@ node {
         stage('パッチの適用') {
             sh 'cd fess && sudo ./apply_patch.sh'
         }
+        stage('Fessサービス再起動') {
+            sh 'sudo systemctl restart fess'
+        }
+        stage('Fessサービス起動確認') {
+            sh 'sudo ./check_http_response.sh'
+        }
         stage('sorryページの作成') {
             sh 'cd fess && /usr/local/rbenv/shims/ruby make_sorry_page.rb'
         }
@@ -19,9 +25,6 @@ node {
         stage('sorryページの公開') {
             //tempdirはruby内と合わせる。
             sh 'cd fess && sudo /root/.local/bin/aws s3api put-bucket-policy --bucket pcl-manual-search-sorry --policy file://public.json'
-        }
-        stage('Fessサービス再起動') {
-            sh 'sudo systemctl restart fess'
         }
     } finally {
         sh 'sudo rm -rf fess'
