@@ -1,6 +1,6 @@
 #!/bin/bash
 
-check=0
+check=1
 while [ ! $check ]
 do
   echo check response
