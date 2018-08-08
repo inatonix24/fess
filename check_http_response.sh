@@ -1,7 +1,7 @@
 #!/bin/bash
 
 check=true
-while [ check ]
+while [ $check ]
 do
   echo check response
   check=`curl http://localhost | grep "Connection refused"''
