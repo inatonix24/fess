@@ -43,7 +43,7 @@ disabled_form = <<-EOS
 	$('#contentQuery').attr('disabled', true);
 	$('#searchButton').attr('disabled', true);
 	$('#searchOptionsButton').attr('disabled', true);
-	$(".notification").html("サービス時間外です。");
+	$(".notification").html("サービス時間外です。\n管理者が出社するまで、ねこを転がして遊びましょう。");
 	$(".help-link").css('visibility','hidden');
 </script>
 EOS
