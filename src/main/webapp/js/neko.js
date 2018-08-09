@@ -28,9 +28,6 @@ var isMouseDown = false;
 var isMobile = ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf('iPad') == -1) 
     || navigator.userAgent.indexOf('iPod') > 0 
     || navigator.userAgent.indexOf('Android') > 0)
-var isNekocountready = false;
-var addedNekocount = 0;
-var isNekocountupdating = false;
 
 function init() {
     setInterval(getNekocount, 2000);

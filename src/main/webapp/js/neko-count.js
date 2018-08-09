@@ -1,4 +1,7 @@
 var NekocountTableName = "Nekocount"
+var isNekocountready = false;
+var addedNekocount = 0;
+var isNekocountupdating = false;
 
 function initAWSconfig() {
     AWS.config.update({
