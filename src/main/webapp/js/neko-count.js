@@ -48,11 +48,7 @@ function getNekocount() {
                     "id": 0
                 }
             };
-            setInterval(
-                function() {
-                    updateCount(docClient, params)
-                },
-                2000)
+            updateCount(docClient, params)
         }
     })
 }
